@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarhatTube - Reklamsız & Güvenli Video Platformu</title>
+    <title>FarhatTube - Kesintisiz Video Platformu</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -27,29 +27,28 @@
             color: red;
             letter-spacing: 1px;
         }
-        .auth-buttons button {
+        .auth-buttons button, .playlist button {
             background-color: red;
             color: white;
             border: none;
             padding: 8px 16px;
-            margin-left: 10px;
+            margin: 5px;
             cursor: pointer;
             font-weight: bold;
             border-radius: 5px;
         }
-        .auth-buttons button:hover {
+        .auth-buttons button:hover, .playlist button:hover {
             background-color: darkred;
         }
         .login-box {
             background-color: #222;
             max-width: 350px;
-            margin: 40px auto;
-            padding: 30px;
+            margin: 20px auto;
+            padding: 25px;
             border-radius: 8px;
             border: 1px solid #333;
             display: none;
         }
-        .login-box h3 { margin-top: 0; color: red; }
         .login-box input {
             width: 90%;
             padding: 10px;
@@ -60,64 +59,55 @@
             color: white;
         }
         .video-container {
-            width: 80%;
+            width: 85%;
             max-width: 800px;
             height: 450px;
             background-color: #222;
-            margin: 30px auto;
+            margin: 20px auto;
             display: flex;
             justify-content: center;
             align-items: center;
             border: 2px dashed #444;
             border-radius: 10px;
+            overflow: hidden;
         }
+        iframe { width: 100%; height: 100%; border: none; }
+        .playlist { display: none; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div class="logo">FARHATTUBE</div>
-        <div class="auth-buttons">
+        <div class="auth-buttons" id="authArea">
             <button onclick="toggleLogin()">Giriş Yap</button>
             <button onclick="toggleLogin()">Kayıt Ol</button>
         </div>
     </div>
 
     <div class="login-box" id="loginBox">
-        <h3 id="boxTitle">FarhatTube Hesabı Oluştur</h3>
+        <h3 style="color: red; margin: 0 0 15px 0;">FarhatTube Hesabı</h3>
         <input type="text" id="username" placeholder="Kullanıcı Adı veya E-posta">
         <input type="password" id="password" placeholder="Şifre">
-        <button style="background-color:red; color:white; border:none; padding:10px 20px; cursor:pointer; width:100%; border-radius:4px; font-weight:bold;" onclick="accountAction()">Onayla</button>
+        <button style="background-color:red; color:white; border:none; padding:10px; cursor:pointer; width:100%; border-radius:4px; font-weight:bold;" onclick="accountAction()">Onayla</button>
     </div>
 
-    <h2 style="margin-top:40px;">FarhatTube Platformuna Hoş Geldiniz</h2>
+    <h2 style="margin-top:30px;">FarhatTube Platformuna Hoş Geldiniz</h2>
     <p>Reklamsız, kesintisiz ve güvenli video izleme deneyimi.</p>
 
-    <div class="video-container">
+    <div class="playlist" id="playlistArea">
+        <p style="margin-bottom: 10px; font-weight: bold; color: #aaa;">İzlemek İstediğiniz Kanalı Seçin:</p>
+        <button onclick="changeVideo('dQw4w9WgXcQ')">🎵 Popüler Müzik</button>
+        <button onclick="changeVideo('jfKfPfyJRdk')">🎧 Lofi Beats (Çalışma Müziği)</button>
+        <button onclick="changeVideo('5qap5aO4i9A')">🍿 Canlı Doğa Yayını</button>
+    </div>
+
+    <div class="video-container" id="videoWrapper">
         <p id="videoStatus">Lütfen video oynatıcıyı aktifleştirmek için giriş yapın.</p>
     </div>
 
     <script>
         function toggleLogin() {
             var box = document.getElementById('loginBox');
-            if (box.style.display === 'block') {
-                box.style.display = 'none';
-            } else {
-                box.style.display = 'block';
-            }
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
         }
-
-        function accountAction() {
-            var user = document.getElementById('username').value;
-            if(user) {
-                alert("FarhatTube Hesabınıza Başarıyla Giriş Yapıldı: " + user);
-                document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('videoStatus').innerHTML = "🎥 Video Oynatıcı Hazır (Reklamlar Engellendi)";
-                document.querySelector('.auth-buttons').innerHTML = "<span style='color:green; font-weight:bold;'>Hoş geldin, " + user + "!</span>";
-            } else {
-                alert("Lütfen alanları doldurun.");
-            }
-        }
-    </script>
-</body>
-</html>
