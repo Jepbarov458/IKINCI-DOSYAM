@@ -25,8 +25,10 @@
         /* Video Alanı Stilleri */
         #videoSayfasi { display: none; }
         .video-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .video-card { background-color: #222; width: 300px; padding: 15px; border-radius: 8px; border: 1px solid #333; text-align: left; }
-        .video-box { width: 100%; height: 180px; background-color: #000; display: flex; align-items: center; justify-content: center; color: #555; border-radius: 4px; font-size: 24px; }
+        .video-card { background-color: #222; width: 320px; padding: 15px; border-radius: 8px; border: 1px solid #333; text-align: left; }
+        
+        /* Gerçek Video Oynatıcı Çerçevesi */
+        .video-box iframe { width: 100%; height: 180px; border: none; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -55,16 +57,26 @@
         <main class="content">
             <h1 style="color: red;">Başarıyla Giriş Yapıldı 🎉</h1>
             <p>İzlemek istediğiniz videoyu seçin:</p>
+            
             <div class="video-grid">
+                <!-- 1. GERÇEK VİDEO KUTUSU -->
                 <div class="video-card">
-                    <div class="video-box">▶️</div>
-                    <h3>Örnek Video Başlığı 1</h3>
-                    <p style="color:#888;">10B İzlenme • 2 gün önce</p>
+                    <div class="video-box">
+                        <!-- Buraya örnek bir müzik videosu koydum -->
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <h3>Harika Şarkı Dinle</h3>
+                    <p style="color:#888;">1.5M İzlenme • 2 gün önce</p>
                 </div>
+
+                <!-- 2. GERÇEK VİDEO KUTUSU -->
                 <div class="video-card">
-                    <div class="video-box">▶️</div>
-                    <h3>Örnek Video Başlığı 2</h3>
-                    <p style="color:#888;">5B İzlenme • 1 hafta önce</p>
+                    <div class="video-box">
+                        <!-- Buraya örnek bir doğa videosu koydum -->
+                        <iframe src="https://youtube.com" allowfullscreen></iframe>
+                    </div>
+                    <h3>Rahatlatıcı Doğa Videosu</h3>
+                    <p style="color:#888;">500B İzlenme • 1 hafta önce</p>
                 </div>
             </div>
         </main>
@@ -102,7 +114,6 @@
         function paneliKapat() { modal.style.display = "none"; }
         window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 
-        // SAYFA DEĞİŞTİRME MANTIĞI
         function sayfaDegistir(hedef) {
             if(hedef === 'video') {
                 document.getElementById("anaSayfa").style.display = "none";
@@ -116,7 +127,7 @@
         function formuGonder(event) {
             event.preventDefault();
             paneliKapat();
-            sayfaDegistir('video'); // Sayfa dışına çıkmadan direkt içeriği değiştirir
+            sayfaDegistir('video');
         }
     </script>
 
