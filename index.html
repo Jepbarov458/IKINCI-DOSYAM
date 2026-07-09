@@ -5,85 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FarhatTube - Reklamsız Deneyim</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #111;
-            color: white;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-        }
-        /* Üst Menü (Header) */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background-color: #000;
-            border-bottom: 2px solid red;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: red;
-            text-decoration: none;
-        }
-        .auth-buttons button {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            margin-left: 10px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .auth-buttons button:hover {
-            background-color: darkred;
-        }
-        /* Ana Gövde */
-        .content {
-            padding: 50px 20px;
-        }
+        body { font-family: Arial, sans-serif; background-color: #111; color: white; text-align: center; padding: 0; margin: 0; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: #000; border-bottom: 2px solid red; }
+        .logo { font-size: 24px; font-weight: bold; color: red; text-decoration: none; }
+        .auth-buttons button { background-color: red; color: white; border: none; padding: 8px 16px; margin-left: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        .auth-buttons button:hover { background-color: darkred; }
+        .content { padding: 50px 20px; }
         h1 { color: #fff; font-size: 32px; }
         p { color: #aaa; font-size: 18px; }
-
-        /* AÇILIR GİRİŞ PANELİ (MODAL) STİLLERİ */
-        .modal {
-            display: none; /* İlk başta gizli */
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        .modal-content {
-            background-color: #222;
-            margin: 15% auto;
-            padding: 30px;
-            border: 1px solid red;
-            width: 300px;
-            border-radius: 8px;
-            text-align: left;
-            position: relative;
-        }
-        .close-btn {
-            position: absolute;
-            right: 15px; top: 10px;
-            color: #aaa; font-size: 24px; cursor: pointer;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); }
+        .modal-content { background-color: #222; margin: 15% auto; padding: 30px; border: 1px solid red; width: 300px; border-radius: 8px; text-align: left; position: relative; }
+        .close-btn { position: absolute; right: 15px; top: 10px; color: #aaa; font-size: 24px; cursor: pointer; }
         .close-btn:hover { color: white; }
         .modal-content h2 { margin-top: 0; color: red; text-align: center; }
-        .modal-content input {
-            width: 90%; padding: 10px; margin: 10px 0;
-            background-color: #333; border: 1px solid #444;
-            color: white; border-radius: 4px;
-        }
-        .modal-content button {
-            width: 97%; padding: 10px; background-color: red;
-            color: white; border: none; font-weight: bold;
-            border-radius: 4px; cursor: pointer; margin-top: 10px;
-        }
+        .modal-content input { width: 90%; padding: 10px; margin: 10px 0; background-color: #333; border: 1px solid #444; color: white; border-radius: 4px; }
+        .modal-content button { width: 97%; padding: 10px; background-color: red; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
         .modal-content button:hover { background-color: darkred; }
     </style>
 </head>
@@ -92,7 +28,6 @@
     <header class="header">
         <a href="index.html" class="logo">FarhatTube</a>
         <div class="auth-buttons">
-            <!-- Butonlar paneli açacak fonksiyonu tetikliyor -->
             <button onclick="paneliAc('giris')">Giriş Yap</button>
             <button onclick="paneliAc('kayit')">Kayıt Ol</button>
         </div>
@@ -103,7 +38,6 @@
         <p>Reklamsız ve kesintisiz video deneyiminin keyfini çıkarın.</p>
     </main>
 
-    <!-- GERÇEK GİRİŞ / KAYIT PANELİ -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="paneliKapat()">&times;</span>
@@ -116,13 +50,11 @@
         </div>
     </div>
 
-    <!-- PANELİ ÇALIŞTIRAN JAVASCRIPT KODLARI -->
     <script>
         var modal = document.getElementById("authModal");
         var baslik = document.getElementById("modalBaslik");
         var buton = document.getElementById("submitButon");
 
-        // Paneli açan fonksiyon
         function paneliAc(tip) {
             modal.style.display = "block";
             if(tip === 'giris') {
@@ -134,24 +66,14 @@
             }
         }
 
-        // Paneli kapatan fonksiyon
-        function paneliKapat() {
-            modal.style.display = "none";
-        }
+        function paneliKapat() { modal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 
-        // Dışarı tıklayınca kapatma
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Form gönderildiğinde çalışacak kısım
+        // BEKLETME YAPMAYAN DİREKT UÇURMA FONKSİYONU
         function formuGonder(event) {
             event.preventDefault();
-            var isim = document.getElementById("kullaniciAdi").value;
-            alert("Hoş geldin, " + isim + "! Başarıyla işlem yapıldı.");
-            paneliKapat();
+            // Hiçbir uyarı vermeden doğrudan video.html sayfasına fırlatır
+            window.location.href = "video.html";
         }
     </script>
 
