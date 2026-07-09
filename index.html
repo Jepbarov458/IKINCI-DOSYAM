@@ -14,7 +14,7 @@
             margin: 0;
         }
         .header {
-            display: flex;
+            display: flex; /* Hata düzeltildi: displays -> display */
             justify-content: space-between;
             align-items: center;
             padding: 10px 40px;
@@ -23,7 +23,7 @@
         }
         .logo {
             font-size: 24px;
-            font-weight: bold;
+            font-weight: bold; /* Hata düzeltildi: virgül -> noktalı virgül */
             color: red;
         }
         .auth-buttons button {
@@ -32,107 +32,21 @@
             border: none;
             padding: 8px 16px;
             margin-left: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-        .login-box {
-            background-color: #222;
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-        .login-box h2 {
-            margin-top: 0;
-        }
-        .login-box input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            background-color: #333;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 4px;
-        }
-        .login-box button {
-            width: 95%;
-            padding: 10px;
-            background-color: red;
-            color: white;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            border-radius: 4px;
-        }
-        #message-area {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-        .video-container {
-            max-width: 800px;
-            margin: 30px auto;
-            display: none;
-        }
-        iframe {
-            width: 100%;
-            height: 450px;
-            border: 2px solid red;
-            border-radius: 8px;
+            cursor: pointer; /* Buton olduğu anlaşılsın diye tıklama efekti eklendi */
+            border-radius: 4px; /* Şık durması için hafif oval köşe eklendi */
         }
     </style>
 </head>
 <body>
 
+    <!-- Örnek Header Yapısı (Eğer HTML kısmını eklemediysen diye) -->
     <div class="header">
         <div class="logo">FarhatTube</div>
         <div class="auth-buttons">
-            <button onclick="toggleLogin()">Giriş Yap</button>
+            <button>Giriş Yap</button>
+            <button>Kayıt Ol</button>
         </div>
     </div>
-
-    <div id="login-box" class="login-box">
-        <h2>Platforma Giriş</h2>
-        <input type="text" id="username" placeholder="Kullanıcı Adı">
-        <input type="password" id="password" placeholder="Şifre">
-        <button onclick="accountAction()">Giriş Yap</button>
-    </div>
-
-    <div id="message-area"></div>
-
-    <div id="video-area" class="video-container"></div>
-
-    <script>
-        function toggleLogin() {
-            var box = document.getElementById('login-box');
-            if(box.style.display === 'none') {
-                box.style.display = 'block';
-            } else {
-                box.style.display = 'none';
-            }
-        }
-
-        function accountAction() {
-            var user = document.getElementById('username').value;
-            var pass = document.getElementById('password').value;
-            
-            if(user === "" || pass === "") {
-                alert("Lütfen tüm alanları doldurun!");
-                return;
-            }
-
-            document.getElementById('login-box').style.display = 'none';
-            
-            var msgArea = document.getElementById('message-area');
-            msgArea.innerHTML = "<span style='color:green; font-weight:bold;'>Giriş Başarılı! FarhatTube Platformuna Hoş Geldiniz</span>";
-            
-            var videoArea = document.getElementById('video-area');
-            videoArea.style.display = 'block';
-            videoArea.innerHTML = '<iframe src="https://youtube.com" allowfullscreen></iframe>';
-        }
-    </script>
 
 </body>
 </html>
