@@ -7,9 +7,9 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #111; color: white; text-align: center; padding: 0; margin: 0; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: #000; border-bottom: 2px solid red; }
-        .logo { font-size: 24px; font-weight: bold; color: red; text-decoration: none; }
-        .auth-buttons button { background-color: red; color: white; border: none; padding: 8px 16px; margin-left: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; }
-        .auth-buttons button:hover { background-color: darkred; }
+        .logo { font-size: 24px; font-weight: bold; color: red; text-decoration: none; cursor: pointer; }
+        .auth-buttons button, .logout-btn { background-color: red; color: white; border: none; padding: 8px 16px; margin-left: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; }
+        .auth-buttons button:hover, .logout-btn:hover { background-color: darkred; }
         .content { padding: 50px 20px; }
         h1 { color: #fff; font-size: 32px; }
         p { color: #aaa; font-size: 18px; }
@@ -21,30 +21,63 @@
         .modal-content input { width: 90%; padding: 10px; margin: 10px 0; background-color: #333; border: 1px solid #444; color: white; border-radius: 4px; }
         .modal-content button { width: 97%; padding: 10px; background-color: red; color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
         .modal-content button:hover { background-color: darkred; }
+        
+        /* Video Alanı Stilleri */
+        #videoSayfasi { display: none; }
+        .video-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .video-card { background-color: #222; width: 300px; padding: 15px; border-radius: 8px; border: 1px solid #333; text-align: left; }
+        .video-box { width: 100%; height: 180px; background-color: #000; display: flex; align-items: center; justify-content: center; color: #555; border-radius: 4px; font-size: 24px; }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <a href="index.html" class="logo">FarhatTube</a>
-        <div class="auth-buttons">
-            <button onclick="paneliAc('giris')">Giriş Yap</button>
-            <button onclick="paneliAc('kayit')">Kayıt Ol</button>
-        </div>
-    </header>
+    <!-- GİRİŞ YAPILMADAN ÖNCEKİ ANA SAYFA -->
+    <div id="anaSayfa">
+        <header class="header">
+            <span class="logo" onclick="sayfaDegistir('ana')">FarhatTube</span>
+            <div class="auth-buttons">
+                <button onclick="paneliAc('giris')">Giriş Yap</button>
+                <button onclick="paneliAc('kayit')">Kayıt Ol</button>
+            </div>
+        </header>
+        <main class="content">
+            <h1>FarhatTube'a Hoş Geldiniz!</h1>
+            <p>Reklamsız ve kesintisiz video deneyiminin keyfini çıkarın.</p>
+        </main>
+    </div>
 
-    <main class="content">
-        <h1>FarhatTube'a Hoş Geldiniz!</h1>
-        <p>Reklamsız ve kesintisiz video deneyiminin keyfini çıkarın.</p>
-    </main>
+    <!-- GİRİŞ YAPILDIKTAN SONRAKİ VİDEO SAYFASI -->
+    <div id="videoSayfasi">
+        <header class="header">
+            <span class="logo" onclick="sayfaDegistir('ana')">FarhatTube</span>
+            <button class="logout-btn" onclick="sayfaDegistir('ana')">Çıkış Yap</button>
+        </header>
+        <main class="content">
+            <h1 style="color: red;">Başarıyla Giriş Yapıldı 🎉</h1>
+            <p>İzlemek istediğiniz videoyu seçin:</p>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-box">▶️</div>
+                    <h3>Örnek Video Başlığı 1</h3>
+                    <p style="color:#888;">10B İzlenme • 2 gün önce</p>
+                </div>
+                <div class="video-card">
+                    <div class="video-box">▶️</div>
+                    <h3>Örnek Video Başlığı 2</h3>
+                    <p style="color:#888;">5B İzlenme • 1 hafta önce</p>
+                </div>
+            </div>
+        </main>
+    </div>
 
+    <!-- GİRİŞ PANELİ MODAL -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="paneliKapat()">&times;</span>
             <h2 id="modalBaslik">Giriş Yap</h2>
             <form onsubmit="formuGonder(event)">
-                <input type="text" id="kullaniciAdi" placeholder="Kullanıcı Adı" required>
-                <input type="password" id="sifre" placeholder="Şifre" required>
+                <input type="text" placeholder="Kullanıcı Adı" required>
+                <input type="password" placeholder="Şifre" required>
                 <button type="submit" id="submitButon">Giriş Yap</button>
             </form>
         </div>
@@ -69,11 +102,21 @@
         function paneliKapat() { modal.style.display = "none"; }
         window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 
-        // BEKLETME YAPMAYAN DİREKT UÇURMA FONKSİYONU
+        // SAYFA DEĞİŞTİRME MANTIĞI
+        function sayfaDegistir(hedef) {
+            if(hedef === 'video') {
+                document.getElementById("anaSayfa").style.display = "none";
+                document.getElementById("videoSayfasi").style.display = "block";
+            } else {
+                document.getElementById("anaSayfa").style.display = "block";
+                document.getElementById("videoSayfasi").style.display = "none";
+            }
+        }
+
         function formuGonder(event) {
             event.preventDefault();
-            // Hiçbir uyarı vermeden doğrudan video.html sayfasına fırlatır
-            window.location.href = "video.html";
+            paneliKapat();
+            sayfaDegistir('video'); // Sayfa dışına çıkmadan direkt içeriği değiştirir
         }
     </script>
 
