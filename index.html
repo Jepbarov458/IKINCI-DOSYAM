@@ -10,21 +10,23 @@
             background-color: #111;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 0;
             margin: 0;
         }
+        /* Üst Menü (Header) Tasarımı */
         .header {
-            display: flex; /* Hata düzeltildi: displays -> display */
+            display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 40px;
+            padding: 15px 40px;
             background-color: #000;
             border-bottom: 2px solid red;
         }
         .logo {
             font-size: 24px;
-            font-weight: bold; /* Hata düzeltildi: virgül -> noktalı virgül */
+            font-weight: bold;
             color: red;
+            text-decoration: none;
         }
         .auth-buttons button {
             background-color: red;
@@ -32,21 +34,50 @@
             border: none;
             padding: 8px 16px;
             margin-left: 10px;
-            cursor: pointer; /* Buton olduğu anlaşılsın diye tıklama efekti eklendi */
-            border-radius: 4px; /* Şık durması için hafif oval köşe eklendi */
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .auth-buttons button:hover {
+            background-color: darkred;
+        }
+        /* Sayfa İçeriği */
+        .content {
+            padding: 50px 20px;
+        }
+        h1 {
+            color: #fff;
+            font-size: 32px;
+        }
+        p {
+            color: #aaa;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Örnek Header Yapısı (Eğer HTML kısmını eklemediysen diye) -->
-    <div class="header">
-        <div class="logo">FarhatTube</div>
+    <header class="header">
+        <!-- Logoya tıklanınca sayfayı yeniler -->
+        <a href="index.html" class="logo">FarhatTube</a>
         <div class="auth-buttons">
-            <button>Giriş Yap</button>
-            <button>Kayıt Ol</button>
+            <!-- JavaScript tıklandığında uyarı verecek şekilde ayarlandı -->
+            <button onclick="mesajGoster('Giriş Yap butonuna tıklandı!')">Giriş Yap</button>
+            <button onclick="mesajGoster('Kayıt Ol butonuna tıklandı!')">Kayıt Ol</button>
         </div>
-    </div>
+    </header>
+
+    <main class="content">
+        <h1>FarhatTube'a Hoş Geldiniz!</h1>
+        <p>Reklamsız ve kesintisiz video deneyiminin keyfini çıkarın.</p>
+    </main>
+
+    <!-- Tuşların çalışmasını sağlayan JavaScript kodları -->
+    <script>
+        function mesajGoster(mesaj) {
+            alert(mesaj);
+        }
+    </script>
 
 </body>
 </html>
